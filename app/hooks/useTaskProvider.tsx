@@ -1,31 +1,50 @@
-import React, { createContext, useState, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { Task, TaskContextType } from '../../types/types';
 
-import { Task } from '../../types/types';
-
-type TaskContextType = {
-  tasks?: Task[];
-  addTask?: (task: Task) => void;
-  removeTask?: (id: string) => void;
-  children?: ReactNode;
-};
+interface TaskProviderProps {
+  children: ReactNode; // Определяем тип для children
+}
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
 
-export const TaskProvider = ({ children }: TaskContextType) => {
+export const useTaskContext = (): TaskContextType => {
+  const context = useContext(TaskContext);
+  if (!context) {
+    throw new Error('useTaskContext must be used within a TaskProvider');
+  }
+  return context;
+};
+
+export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
+
+  const addTask = (task: Task) => {
+    setTasks((prevTasks) => [...prevTasks, task]);
+  };
 
   const removeTask = (id: string) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 
-  const addTask = (task: Task) => setTasks((prevState) => [...prevState, task]);
-  return <TaskContext.Provider value={{ tasks, addTask, removeTask }}>{children}</TaskContext.Provider>;
-};
+  const updateTaskStatus = (id: string, status: 'pending' | 'in-progress' | 'completed') => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === id ? { ...task, status } : task))
+    );
+  };
 
-export const useTaskContext = () => {
-  const context = useContext(TaskContext);
-  if (!context) {
-    throw new Error('useTaskContext must be used within a UseTaskProvider');
-  }
-  return context;
+  const updateTask = (id: string, updatedTask: Partial<Task>) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === id ? { ...task, ...updatedTask } : task))
+    );
+  };
+
+  const value: TaskContextType = {
+    tasks,
+    addTask,
+    removeTask,
+    updateTaskStatus,
+    updateTask,
+  };
+
+  return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
 };

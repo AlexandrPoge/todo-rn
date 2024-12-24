@@ -14,6 +14,8 @@ const CreateFormTodo = () => {
     setTime,
     setDescription,
     setTaskTitle,
+    location,
+    setLocation
   } = useFormData();
 
   return (
@@ -51,6 +53,13 @@ const CreateFormTodo = () => {
           handleChangeText={setTime}
           isTimePicker
           placeholder="Select time"
+        />
+
+        <FormField
+          title="Location"
+          value={location}
+          handleChangeText={setLocation}
+          placeholder="Location"
         />
       </View>
 

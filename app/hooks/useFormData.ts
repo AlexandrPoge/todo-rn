@@ -9,20 +9,22 @@ const useFormData = () => {
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [location, setLocation] = useState('');
 
-  const { addTask, removeTask } = useTaskContext();
+  const { addTask, removeTask,updateTaskStatus } = useTaskContext();
   const handleAddTask = () => {
-    if (!date || !time || !description || !taskTitle) {
+    if (!date || !time || !description || !taskTitle || !location) {
       alert('Please select all the field');
       return;
     }
     if (addTask) {
-      addTask({ id: UUID.v4(), date, time, description, taskTitle });
+      addTask({ id: UUID.v4(), date, time, description, taskTitle, location, status:'pending' });
     }
     setDate('');
     setTime('');
     setDescription('');
     setTaskTitle('');
+    setLocation('');
     router.push('/TodoList');
   };
 
@@ -41,9 +43,22 @@ const useFormData = () => {
     setTaskTitle('');
     router.push('/TodoList');
   };
+  const handleStatusChange = (id:string, currentStatus:string) => {
+    const nextStatus = currentStatus === 'pending'
+      ? 'in-progress'
+      : currentStatus === 'in-progress'
+        ? 'completed'
+        : 'pending';
+    if (updateTaskStatus) {
+      updateTaskStatus(id, nextStatus);
+    }
+  };
+
+
   return {
     handleAddTask,
     handleRemoveTask,
+    handleStatusChange,
     taskTitle,
     description,
     date,
@@ -52,6 +67,8 @@ const useFormData = () => {
     setTaskTitle,
     setDate,
     setTime,
+    location,
+    setLocation,
   };
 };
 
