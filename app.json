@@ -3,21 +3,16 @@
     "name": "todo-rn",
     "slug": "todo-rn",
     "version": "1.0.0",
-
+    "scheme": "todo-rn",
     "web": {
       "favicon": "./assets/favicon.png"
     },
-
     "experiments": {
       "tsconfigPaths": true
     },
-
     "plugins": [],
-
     "orientation": "portrait",
-
     "userInterfaceStyle": "light",
-
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
