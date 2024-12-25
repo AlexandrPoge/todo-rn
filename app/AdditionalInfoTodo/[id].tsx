@@ -25,11 +25,11 @@ const AdditionalInfoTodo = () => {
 
     const task = tasks?.find((task) => task.id === id);
     if (task) {
-      setTaskTitle(task.taskTitle );
+      setTaskTitle(task.taskTitle);
       setDescription(task.description);
-      setDate(task.date );
-      setTime(task.time );
-      setLocation(task.location );
+      setDate(task.date);
+      setTime(task.time);
+      setLocation(task.location);
     } else {
       Alert.alert('Error', 'Task not found. Returning to list.');
       router.push('/TodoList');
@@ -97,8 +97,7 @@ const AdditionalInfoTodo = () => {
 
       <TouchableOpacity
         onPress={handleUpdateTask}
-        className="mx-auto mt-6 w-[150px] rounded-lg bg-[#83C5BE] py-3"
-      >
+        className="mx-auto mt-6 w-[150px] rounded-lg bg-[#83C5BE] py-3">
         <Text className="text-center text-[18px] font-semibold text-white">Update Task</Text>
       </TouchableOpacity>
     </SafeAreaView>

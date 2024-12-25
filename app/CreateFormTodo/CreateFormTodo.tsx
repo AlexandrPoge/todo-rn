@@ -24,7 +24,7 @@ const CreateFormTodo = () => {
         <Text className="py-2 text-center text-[24px] font-bold text-white">Create your task</Text>
       </View>
 
-      <View className="gap-y-5 p-4">
+      <View className="gap-y-5 p-4 items-center">
         <FormField
           title="Task title"
           value={taskTitle}
