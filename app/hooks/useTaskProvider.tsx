@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import { Task, TaskContextType } from '../../types/types';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface TaskProviderProps {
   children: ReactNode; // Определяем тип для children
@@ -37,6 +38,29 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
       prevTasks.map((task) => (task.id === id ? { ...task, ...updatedTask } : task))
     );
   };
+
+  useEffect(() => {
+    const loadTasks = async () => {
+      try {
+        const storedTasks = await AsyncStorage.getItem('@tasks');
+        if (storedTasks) setTasks(JSON.parse(storedTasks));
+      } catch (error) {
+        console.error('Failed to load tasks from storage', error);
+      }
+    };
+    loadTasks();
+  }, []);
+
+  useEffect(() => {
+    const saveTasks = async () => {
+      try {
+        await AsyncStorage.setItem('@tasks', JSON.stringify(tasks));
+      } catch (error) {
+        console.error('Failed to save tasks to storage', error);
+      }
+    };
+    saveTasks();
+  }, [tasks]);
 
   const value: TaskContextType = {
     tasks,

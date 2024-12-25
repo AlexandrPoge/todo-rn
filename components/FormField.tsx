@@ -57,8 +57,8 @@ const FormField = ({
             <Text className="font-psemibold text-base text-[#006D77]">
               {selectedDateTime
                 ? isDatePicker
-                  ? selectedDateTime.toLocaleDateString() // Отображаем только дату
-                  : selectedDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) // Отображаем только время
+                  ? selectedDateTime.toLocaleDateString()
+                  : selectedDateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                 : placeholder || (isDatePicker ? 'Select date' : 'Select time')}
             </Text>
           </Pressable>
