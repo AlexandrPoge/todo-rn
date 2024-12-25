@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 
 export type Task = {
   date: string;
@@ -17,3 +16,8 @@ export type TaskContextType = {
   updateTaskStatus: (id: string, status: 'pending' | 'in-progress' | 'completed') => void;
   updateTask: (id: string, updatedTask: Partial<Task>) => void
 };
+
+export type Button = {
+  title: string;
+  onPress:() => void
+}
