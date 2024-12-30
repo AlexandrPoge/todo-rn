@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+
 import { Task, TaskContextType } from '../../types/types';
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface TaskProviderProps {
-  children: ReactNode; // Определяем тип для children
+  children: ReactNode;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -28,9 +29,7 @@ export const TaskProvider: React.FC<TaskProviderProps> = ({ children }) => {
   };
 
   const updateTaskStatus = (id: string, status: 'pending' | 'in-progress' | 'completed') => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => (task.id === id ? { ...task, status } : task))
-    );
+    setTasks((prevTasks) => prevTasks.map((task) => (task.id === id ? { ...task, status } : task)));
   };
 
   const updateTask = (id: string, updatedTask: Partial<Task>) => {

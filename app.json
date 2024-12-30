@@ -4,9 +4,7 @@
     "slug": "todo-rn",
     "version": "1.0.0",
     "scheme": "todo-rn",
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
+    "web": {},
     "experiments": {
       "tsconfigPaths": true
     },
@@ -14,20 +12,27 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splashscreen_logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "newArchEnabled": true
+      "userInterfaceStyle": "automatic",
+      "bundleIdentifier": "com.flekssando.todorn"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
-        "newArchEnabled": true
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.flekssando.todorn"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0711fd4f-c2d7-423a-99cb-18e75f7626c2"
       }
     }
   }

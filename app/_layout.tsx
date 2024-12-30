@@ -1,4 +1,8 @@
+import 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
+
+import 'react-native-reanimated';
+
 
 import '../global.css';
 import { TaskProvider } from './hooks/useTaskProvider';
